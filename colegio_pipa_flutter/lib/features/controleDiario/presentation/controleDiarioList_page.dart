@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:colegio_pipa_flutter/features/home/presentation/bar.dart';
+import 'package:colegio_pipa_flutter/features/utils/drawer.dart';
+import 'package:colegio_pipa_flutter/features/utils/buttonNavegation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:colegio_pipa_flutter/features/home/presentation/home_page.dart'; // Importe a classe HomePage
 
 class Aluno {
   final String nome;
@@ -15,15 +15,14 @@ class Aluno {
 }
 
 class ListaAlunos extends StatefulWidget {
-  const ListaAlunos({Key? key}) : super(key: key);
+  const ListaAlunos({super.key});
 
   @override
-  _ListaAlunosState createState() => _ListaAlunosState();
+  State<ListaAlunos> createState() => _ListaAlunosState();
 }
 
 class _ListaAlunosState extends State<ListaAlunos> {
-  int selectedIndex = 0;
-  var page = [];
+  int selectedIndex = 2;
   List<Aluno> _alunos = [];
 
   Future<List<Aluno>> _buscarAlunos() async {
@@ -77,7 +76,8 @@ class _ListaAlunosState extends State<ListaAlunos> {
           );
         },
       ),
-      bottomNavigationBar: MyWidget(
+      drawer: const DrawerNavegation(),
+      bottomNavigationBar: ButtonNavegation(
         selectedIndex: selectedIndex,
         onItemSelected: (index) {
           setState(() {
