@@ -1,4 +1,6 @@
 import 'package:colegio_pipa_flutter/features/categories/categories_page.dart';
+import 'package:colegio_pipa_flutter/features/utils/buttonNavegation.dart';
+import 'package:colegio_pipa_flutter/features/utils/drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,13 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  var pages = [
-    const CategoriesPage(),
-    Container(color: Colors.orange),
-    Container(color: Colors.red),
-  ];
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,34 +20,17 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: const Text('Home'),
       ),
-      drawer: const Drawer(),
-      body: Expanded(child: pages[_selectedIndex]),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (index) {
+      body: const Expanded(child: CategoriesPage()),
+      drawer: const DrawerNavegation(),
+      bottomNavigationBar: ButtonNavegation(
+        selectedIndex: selectedIndex,
+        onItemSelected: (index) {
           setState(() {
-            _selectedIndex = index;
+            selectedIndex = index;
+            // Handle navigation based on index
           });
         },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            selectedIcon: Icon(Icons.home),
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.warning_outlined),
-            label: 'Avisos',
-            selectedIcon: Icon(Icons.warning),
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.check_outlined),
-            label: 'Controle Diario',
-            selectedIcon: Icon(Icons.check),
-          ),
-        ],
       ),
-      // bottomNavigationBar: Bo,
     );
   }
 }
