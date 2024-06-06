@@ -9,14 +9,29 @@ class CategoriesPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Olá, Ana!',
-              style: Theme.of(context).textTheme.displayMedium),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 190,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(50.0),
+              bottomRight: Radius.circular(50.0),
+            ),
+            color: Color.fromARGB(255, 21, 101, 192), // Cor azul
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(18.0, 46.0, 0.0, 6.0),
+            child: Text(
+              'Olá, Ana!',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Colors.white, // Definindo a cor do texto como branca
+                  ),
+            ),
+          ),
         ),
-        const SizedBox(height: 75),
+        const SizedBox(height: 45),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(18.0,18.0,18.0,0.0),
           child: Text('Menu', style: Theme.of(context).textTheme.labelMedium),
         ),
         Flexible(
@@ -28,10 +43,19 @@ class CategoriesPage extends StatelessWidget {
                 childAspectRatio: 1,
                 crossAxisSpacing: 16,
               ),
-              itemCount: 20,
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return Card(
-                  child: Text('Categoria $index'),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        'Categoria $index',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
