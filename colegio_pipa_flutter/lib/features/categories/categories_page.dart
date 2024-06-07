@@ -31,8 +31,8 @@ class CategoriesPage extends StatelessWidget {
         ),
         const SizedBox(height: 45),
         Padding(
-          padding: const EdgeInsets.fromLTRB(18.0,18.0,18.0,0.0),
-          child: Text('Menu', style: Theme.of(context).textTheme.labelMedium),
+          padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0.0),
+          child: Text('Menu', style: Theme.of(context).textTheme.labelLarge),
         ),
         Flexible(
           child: Padding(
@@ -46,15 +46,23 @@ class CategoriesPage extends StatelessWidget {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return Card(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        'Categoria $index',
-                        textAlign: TextAlign.center,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Image.asset(
+                          'aviso.png', // substitua pelo caminho da sua imagem
+                          fit: BoxFit
+                              .cover, // ajusta a imagem para preencher o espaço disponível
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          'Categoria $index',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },
