@@ -2,6 +2,10 @@ import 'package:colegio_pipa_flutter/core/constants/constants.dart';
 import 'package:colegio_pipa_flutter/features/home/presentation/home_page.dart';
 import 'package:flutter/material.dart';
 
+
+import 'features/login/login.dart';
+import 'features/controleDiario/presentation/controleDiarioNew.dart';
+
 void main() {
   runApp(const App());
 }
@@ -21,6 +25,8 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
+        //'/': (context) => LoginPage(),
+        '/controleDiarioNew': (context) => const ControleDiarioNew(),
       },
     );
   }
