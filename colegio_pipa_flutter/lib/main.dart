@@ -1,27 +1,32 @@
-import 'package:colegio_pipa_flutter/core/constants/constants.dart';
-import 'package:colegio_pipa_flutter/features/home/presentation/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_playground/core/contants.dart';
+import 'package:riverpod_playground/pages/academico_home.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const App());
+import 'providers/app_providers.dart';
+
+void main() async {
+  await dotenv.load(fileName: '.env');
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: dotenv.get('SB_URL'),
+    anonKey: dotenv.get('SB_ANON_KEY'),
+  );
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class App extends StatelessWidget {
-  const App({super.key});
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          useMaterial3: false,
-          colorScheme: lightColorScheme,
-          navigationBarTheme:
-              NavigationBarThemeData(indicatorColor: Colors.blue.shade800)),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),
-      },
+      title: 'Colégio PIPA',
+      theme: ref.watch(themeSwitchProvider) ? kLightTheme : kDarkTheme,
+      home: const AcademicoHomePage(),
     );
   }
 }
