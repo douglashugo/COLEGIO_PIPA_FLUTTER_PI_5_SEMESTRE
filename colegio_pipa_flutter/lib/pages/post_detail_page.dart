@@ -13,13 +13,15 @@ class PostDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(post.category!.description!),
+        centerTitle: true,
       ),
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+            padding: const EdgeInsets.fromLTRB(16, 34, 16, 8),
             child: Text(
               post.title!,
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),

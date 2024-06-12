@@ -16,6 +16,7 @@ class AcademicoPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(category.description!),
+        centerTitle: true,
       ),
       body: posts.when(
         data: (data) {

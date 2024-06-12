@@ -49,13 +49,13 @@ class PostsPage extends StatelessWidget {
                               vertical: 0.0, horizontal: 16),
                           child: Text(
                             post.description!,
-                            maxLines: 3,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(16.0, 8, 16, 20),
+                          padding: const EdgeInsets.fromLTRB(16.0, 8, 16, 8),
                           child: Wrap(
                             spacing: 8,
                             children: [
