@@ -5,12 +5,12 @@ part 'aca_category.g.dart';
 @JsonSerializable()
 class AcaCategory {
   int? id;
-  String? description;
+  String? title;
   String? image;
 
   AcaCategory({
     this.id,
-    this.description,
+    this.title,
     this.image
   });
 
@@ -20,5 +20,5 @@ class AcaCategory {
   Map<String, dynamic> toJson() => _$AcaCategoryToJson(this);
 
   @override
-  String toString() => 'AcaCategory(id: $id, description: $description)';
+  String toString() => 'AcaCategory(id: $id, title: $title)';
 }

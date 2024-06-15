@@ -7,7 +7,7 @@ part 'category_provider.g.dart';
 @riverpod
 FutureOr<List<AcaCategory>> categories(CategoriesRef ref) async {
   final response = await ref.watch(supabaseClientProvider)
-      .from('aca_category')
+      .from('categories')
       .select('*');
 
   return [for (final c in response) AcaCategory.fromJson(c)];

@@ -8,13 +8,13 @@ part of 'aca_category.dart';
 
 AcaCategory _$AcaCategoryFromJson(Map<String, dynamic> json) => AcaCategory(
       id: (json['id'] as num?)?.toInt(),
-      description: json['description'] as String?,
+      title: json['title'] as String?,
       image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$AcaCategoryToJson(AcaCategory instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'description': instance.description,
+      'title': instance.title,
       'image': instance.image,
     };

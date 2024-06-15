@@ -8,10 +8,10 @@ part of 'aca_tag.dart';
 
 AcaTag _$AcaTagFromJson(Map<String, dynamic> json) => AcaTag(
       id: (json['id'] as num?)?.toInt(),
-      description: json['description'] as String?,
+      title: json['title'] as String?,
     );
 
 Map<String, dynamic> _$AcaTagToJson(AcaTag instance) => <String, dynamic>{
       'id': instance.id,
-      'description': instance.description,
+      'title': instance.title,
     };

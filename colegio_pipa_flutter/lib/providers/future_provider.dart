@@ -9,9 +9,9 @@ FutureOr<List<AcaPostDomain>> academicoPostProvider(
     AcademicoPostProviderRef ref, int catId) async {
   final response = await ref
       .watch(supabaseClientProvider)
-      .from('aca_post')
+      .from('posts_categories')
       .select(
-          '*, aca_images!inner(*), aca_tag!inner(*), aca_category!inner(*)')
+          '*, images!inner(*), tags!inner(*), categories!inner(*)')
   .eq("cat_id", catId);
 
   return response.map((e) => AcaPostDomain.fromJson(e)).toList();

@@ -60,10 +60,10 @@ class PostsPage extends StatelessWidget {
                             spacing: 8,
                             children: [
                               Chip(
-                                label: Text(post.category!.description!),
+                                label: Text(post.category!.title!),
                               ),
                               Chip(
-                                label: Text(post.tag!.description!),
+                                label: Text(post.tag!.title!),
                               ),
                             ],
                           ),
