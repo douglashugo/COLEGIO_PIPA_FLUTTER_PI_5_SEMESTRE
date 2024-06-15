@@ -12,7 +12,7 @@ class PostDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(post.category!.description!),
+        title: Text(post.category!.title!),
         centerTitle: true,
       ),
       body: ListView(

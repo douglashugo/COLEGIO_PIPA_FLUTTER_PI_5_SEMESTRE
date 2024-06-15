@@ -61,10 +61,10 @@ class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Controle Diário'),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text('Controle Diário'),
+      // ),
       body: _ocorrencia.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
@@ -88,16 +88,16 @@ class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
                 );
               },
             ),
-      endDrawer: const DrawerNavigation(),
-      bottomNavigationBar: ButtonNavigation(
-        selectedIndex: selectedIndex,
-        onItemSelected: (index) {
-          setState(() {
-            selectedIndex = index;
-            // Handle navigation based on index
-          });
-        },
-      ),
+      // endDrawer: const DrawerNavigation(),
+      // bottomNavigationBar: ButtonNavigation(
+      //   selectedIndex: selectedIndex,
+      //   onItemSelected: (index) {
+      //     setState(() {
+      //       selectedIndex = index;
+      //       // Handle navigation based on index
+      //     });
+      //   },
+      // ),
     );
   }
 }

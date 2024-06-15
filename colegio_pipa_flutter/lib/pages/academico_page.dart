@@ -15,7 +15,7 @@ class AcademicoPage extends ConsumerWidget {
     var posts = ref.watch(academicoPostProviderProvider(category.id!));
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.description!),
+        title: Text(category.title!),
         centerTitle: true,
       ),
       body: posts.when(
