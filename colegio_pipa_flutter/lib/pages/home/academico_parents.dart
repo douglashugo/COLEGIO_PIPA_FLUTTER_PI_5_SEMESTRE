@@ -8,16 +8,16 @@ import 'package:riverpod_playground/pages/widgets/loading_widget.dart';
 import 'package:riverpod_playground/providers/category_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
-import 'academico_page.dart';
+import '../academico_page.dart';
 
-class AcademicoHomePage extends StatefulWidget {
-  const AcademicoHomePage({Key? key}) : super(key: key);
+class AcademicoHomePageParents extends StatefulWidget {
+  const AcademicoHomePageParents({Key? key}) : super(key: key);
 
   @override
-  _AcademicoHomePageState createState() => _AcademicoHomePageState();
+  _AcademicoHomePageParentsState createState() => _AcademicoHomePageParentsState();
 }
 
-class _AcademicoHomePageState extends State<AcademicoHomePage> {
+class _AcademicoHomePageParentsState extends State<AcademicoHomePageParents> {
   int selectedIndex = 0;
 
   @override

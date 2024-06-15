@@ -9,6 +9,7 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
+  String _cafe = 'Regular';
   String _lanche = 'Regular';
   String _almoco = 'Regular';
   String _jantar = 'Regular';
@@ -22,6 +23,7 @@ class _FormPageState extends State<FormPage> {
 
       // Dados do formulário
       final Map<String, String> formData = {
+        'cafe': _cafe,
         'lanche': _lanche,
         'almoco': _almoco,
         'jantar': _jantar,
@@ -60,25 +62,26 @@ class _FormPageState extends State<FormPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            elevation: 8,
-            child: Padding(
+           child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     const Center(
                       child: Text(
                         'Alimentação',
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(height: 20),
+                    _buildSegmentedControl('Café da manhã', _cafe, (newValue) {
+                      setState(() {
+                        _cafe = newValue;
+                      });
+                    }),
                     _buildSegmentedControl('Lanche', _lanche, (newValue) {
                       setState(() {
                         _lanche = newValue;
@@ -94,17 +97,17 @@ class _FormPageState extends State<FormPage> {
                         _jantar = newValue;
                       });
                     }),
-                    _buildSegmentedControl('Mamadeira 1', _mamadeira1, (newValue) {
+                    _buildSegmentedControl('Primeira mamadeira', _mamadeira1, (newValue) {
                       setState(() {
                         _mamadeira1 = newValue;
                       });
                     }),
-                    _buildSegmentedControl('Mamadeira 2', _mamadeira2, (newValue) {
+                    _buildSegmentedControl('Segunda mamadeira', _mamadeira2, (newValue) {
                       setState(() {
                         _mamadeira2 = newValue;
                       });
                     }),
-                    _buildSegmentedControl('Mamadeira 3', _mamadeira3, (newValue) {
+                    _buildSegmentedControl('Terceira mamadeira', _mamadeira3, (newValue) {
                       setState(() {
                         _mamadeira3 = newValue;
                       });
@@ -121,7 +124,7 @@ class _FormPageState extends State<FormPage> {
                 ),
               ),
             ),
-          ),
+          
         ),
       ),
     );
@@ -129,14 +132,21 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildSegmentedControl(String title, String currentValue, ValueChanged<String> onValueChanged) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text(
           title,
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 15),
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
         SegmentedButton(
+          style: SegmentedButton.styleFrom(
+            backgroundColor: Colors.grey[200],
+            foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+            selectedForegroundColor: Colors.white,
+            selectedBackgroundColor: Color.fromARGB(255, 216, 122, 14),
+          ),
           segments: const [
             ButtonSegment(
               value: 'Ruim',
@@ -155,6 +165,7 @@ class _FormPageState extends State<FormPage> {
           onSelectionChanged: (Set<String> newSelection) {
             onValueChanged(newSelection.first);
           },
+          
         ),
         const SizedBox(height: 20),
       ],

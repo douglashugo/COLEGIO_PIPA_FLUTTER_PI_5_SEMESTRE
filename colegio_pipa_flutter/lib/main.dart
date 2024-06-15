@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/core/contants.dart';
-import 'package:riverpod_playground/pages/academico_home.dart';
+import 'package:riverpod_playground/pages/home/academico_home.dart';
 import 'package:riverpod_playground/pages/controle_diario_registro.dart';
+import 'package:riverpod_playground/pages/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'providers/app_providers.dart';
@@ -27,7 +28,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Colégio PIPA',
       theme: ref.watch(themeSwitchProvider) ? kLightTheme : kDarkTheme,
-      home: const AcademicoHomePage(),
+      home: FormPage(),
       routes: {
         '/registro': (context) => FormPage(),
       },
