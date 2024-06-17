@@ -14,11 +14,11 @@ class AcaPostDomain {
   String? createdAt;
   String? title;
   String? description;
-  @JsonKey(name: 'aca_category')
+  @JsonKey(name: 'categories')
   AcaCategory? category;
-  @JsonKey(name: 'aca_tag')
+  @JsonKey(name: 'tags')
   AcaTag? tag;
-  @JsonKey(name: 'aca_images')
+  @JsonKey(name: 'images')
   AcaImage? image;
 
   AcaPostDomain({
