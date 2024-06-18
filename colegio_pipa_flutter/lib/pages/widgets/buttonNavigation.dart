@@ -18,7 +18,12 @@ class ButtonNavigation extends StatelessWidget {
         context,
         MaterialPageRoute(builder: (context) => const AcademicoHomePage()),
       );
-    } else if (index == 2) {
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ControleDiarioCreate()),
+      );
+    }else if (index == 2) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const ControleDiarioCreate()),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/category_home_page.dart';
 import 'package:riverpod_playground/pages/widgets/drawer.dart';
 import 'controle_diario_create_page.dart';
+import 'controle_diario_list_page.dart';
 
 class AcademicoHomePage extends StatefulWidget {
   const AcademicoHomePage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePage(),
-    Container(color: Colors.red),
+    const ListaAlunos(),
     const ControleDiarioCreate()
   ];
 
