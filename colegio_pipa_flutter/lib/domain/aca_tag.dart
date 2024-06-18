@@ -17,5 +17,5 @@ class AcaTag {
   Map<String, dynamic> toJson() => _$AcaTagToJson(this);
 
   @override
-  String toString() => 'AcaTag(id: $id, description: $title)';
+  String toString() => 'AcaTag(id: $id, title: $title)';
 }

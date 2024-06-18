@@ -12,15 +12,15 @@ AcaPostDomain _$AcaPostDomainFromJson(Map<String, dynamic> json) =>
       createdAt: json['created_at'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
-      category: json['aca_category'] == null
+      category: json['categories'] == null
           ? null
-          : AcaCategory.fromJson(json['aca_category'] as Map<String, dynamic>),
-      tag: json['aca_tag'] == null
+          : AcaCategory.fromJson(json['categories'] as Map<String, dynamic>),
+      tag: json['tags'] == null
           ? null
-          : AcaTag.fromJson(json['aca_tag'] as Map<String, dynamic>),
-      image: json['aca_images'] == null
+          : AcaTag.fromJson(json['tags'] as Map<String, dynamic>),
+      image: json['images'] == null
           ? null
-          : AcaImage.fromJson(json['aca_images'] as Map<String, dynamic>),
+          : AcaImage.fromJson(json['images'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AcaPostDomainToJson(AcaPostDomain instance) =>
@@ -29,7 +29,7 @@ Map<String, dynamic> _$AcaPostDomainToJson(AcaPostDomain instance) =>
       'created_at': instance.createdAt,
       'title': instance.title,
       'description': instance.description,
-      'aca_category': instance.category,
-      'aca_tag': instance.tag,
-      'aca_images': instance.image,
+      'categories': instance.category,
+      'tags': instance.tag,
+      'images': instance.image,
     };

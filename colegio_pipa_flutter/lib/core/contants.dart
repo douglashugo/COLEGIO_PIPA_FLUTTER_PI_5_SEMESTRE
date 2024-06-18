@@ -12,7 +12,7 @@ final kLightTheme = ThemeData(
     // brightness: Brightness.light,
     secondaryColor: Colors.blue,
     labelStyle: const TextStyle(
-      color: Colors.black38,
+      color: Color.fromARGB(255, 0, 0, 0),
       fontSize: 12,
     ),
   ),
@@ -26,7 +26,7 @@ final kDarkTheme = ThemeData(
     // brightness: Brightness.light,
     secondaryColor: Colors.blue,
     labelStyle: const TextStyle(
-      color: Colors.white38,
+      color: Color.fromARGB(97, 0, 0, 0),
       fontSize: 12,
     ),
   ),
