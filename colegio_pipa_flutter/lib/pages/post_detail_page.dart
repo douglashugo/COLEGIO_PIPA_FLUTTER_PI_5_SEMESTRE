@@ -41,7 +41,10 @@ class PostDetailPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
             child: Text(
               post.description!,
-              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontSize: 18
+              ),
             ),
           ),
         ],

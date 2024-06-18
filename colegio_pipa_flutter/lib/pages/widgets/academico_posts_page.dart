@@ -41,7 +41,9 @@ class PostsPage extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             post.title!,
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Padding(
@@ -59,9 +61,9 @@ class PostsPage extends StatelessWidget {
                           child: Wrap(
                             spacing: 8,
                             children: [
-                              Chip(
-                                label: Text(post.category!.title!),
-                              ),
+                              // Chip(
+                              //   label: Text(post.category!.title!),
+                              // ),
                               Chip(
                                 label: Text(post.tag!.title!),
                               ),
