@@ -72,6 +72,10 @@ var categories = ref.watch(categoriesProvider);
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              elevation: 1,
                               child: Column(
                                 children: [
                                   Expanded(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/category_home_page.dart';
 import 'package:riverpod_playground/pages/widgets/drawer.dart';
-import 'controle_diario_create_page.dart';
+import 'controle_diario/controle_diario_pais/controle_diario_view.dart';
 import 'controle_diario_list_page.dart';
 
 class AcademicoHomePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePage(),
-    ControleDiarioCreate(),
+    DetalheControleDiarioPage(),
     const ListaAlunos()
     
   ];
@@ -25,7 +25,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Títulos correspondentes aos itens do bottom navigation bar
   List<String> appBarTitles = [
     'Home',
-    'Avisos',
+    'Cardápio',
     'Controle Diário'
   ];
 
@@ -48,19 +48,19 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home),
             label: 'Home',
             selectedIcon: Icon(Icons.home),
           ),
           NavigationDestination(
-            icon: Icon(Icons.warning_outlined),
-            label: 'Avisos',
-            selectedIcon: Icon(Icons.warning),
+            icon: Icon(Icons.restaurant_menu),
+            label: 'Cardápio',
+            selectedIcon: Icon(Icons.restaurant_menu),
           ),
           NavigationDestination(
-            icon: Icon(Icons.check_outlined),
+            icon: Icon(Icons.bookmark),
             label: 'Controle Diario',
-            selectedIcon: Icon(Icons.check),
+            selectedIcon: Icon(Icons.bookmark),
           ),
         ],
       ),

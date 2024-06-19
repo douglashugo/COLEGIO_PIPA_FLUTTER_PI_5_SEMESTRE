@@ -35,21 +35,21 @@ class ButtonNavigation extends StatelessWidget {
         _navigateToScreen(context, index);
       },
       destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
-          selectedIcon: Icon(Icons.home),
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.warning_outlined),
-          label: 'Avisos',
-          selectedIcon: Icon(Icons.warning),
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.check_outlined),
-          label: 'Controle Diário',
-          selectedIcon: Icon(Icons.check),
-        ),
+         NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            selectedIcon: Icon(Icons.home),
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.restaurant_menu),
+            label: 'Cardápio',
+            selectedIcon: Icon(Icons.restaurant_menu),
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.bookmark),
+            label: 'Controle Diario',
+            selectedIcon: Icon(Icons.bookmark),
+          ),
       ],
     );
   }
