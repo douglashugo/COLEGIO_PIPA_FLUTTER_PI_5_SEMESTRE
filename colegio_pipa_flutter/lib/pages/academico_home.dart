@@ -17,8 +17,9 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePage(),
-    const ListaAlunos(),
-    const ControleDiarioCreate()
+    ControleDiarioCreate(),
+    const ListaAlunos()
+    
   ];
 
   // Títulos correspondentes aos itens do bottom navigation bar
