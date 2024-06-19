@@ -7,7 +7,7 @@ part of 'future_provider.dart';
 // **************************************************************************
 
 String _$academicoPostProviderHash() =>
-    r'1ce630b30bc97defc9949837abcce87b85e3898c';
+    r'397f67b8e2d3e4f6a9e078ff2f349fa87ea9a803';
 
 /// Copied from Dart SDK
 class _SystemHash {

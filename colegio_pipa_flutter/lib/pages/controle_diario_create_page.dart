@@ -1,55 +1,15 @@
-import 'dart:convert';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:riverpod_playground/providers/ocorrencias_por_aluno_provider.dart';
 
-
-
-class Ocorrencia {
-  final String ocorrencia;
-  final DateTime data;
-
-  Ocorrencia({required this.ocorrencia, required this.data});
-
-  factory Ocorrencia.fromJson(Map<String, dynamic> json) {
-    return Ocorrencia(
-      ocorrencia: json['ocorrencia'],
-      data: DateTime.parse(json['data']),
-    );
-  }
-}
-
-class ControleDiarioCreate extends StatefulWidget {
-  const ControleDiarioCreate({super.key});
-
-  @override
-  State<ControleDiarioCreate> createState() => _ControleDiarioCreateState();
-}
-
-class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
-  int selectedIndex = 2;
-  List<Ocorrencia> _ocorrencia = [];
-
-  Future<List<Ocorrencia>> _buscarOcorrencia() async {
-    final response = await http.get(Uri.parse(
-        'https://my-json-server.typicode.com/VitorVilla/teste/posts'));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      return data.map((json) => Ocorrencia.fromJson(json)).toList();
-    } else {
-      throw Exception('Falha ao carregar ocorrências');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _buscarOcorrencia().then((ocorrencia) {
-      setState(() {
-        _ocorrencia = ocorrencia;
-      });
-    });
-  }
+class ControleDiarioCreate extends ConsumerWidget {
+  final int? idAluno;
+  const ControleDiarioCreate({super.key, 
+     this.idAluno,
+  });
 
   String _formatarData(DateTime data) {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
@@ -57,45 +17,39 @@ class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ocorrencias = ref.watch(ocorrenciasPorAlunoProvider(idAluno!));
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text('Controle Diário'),
-      // ),
-      body: _ocorrencia.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _ocorrencia.length,
-              itemBuilder: (context, index) {
-                final ocorrencia = _ocorrencia[index];
-                return Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.description_outlined),
-                    title: Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                        ocorrencia.ocorrencia,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+        body: ocorrencias.when(
+      data: (data) {
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final ocorrencia = data[index];
+            return Card(
+              child: ListTile(
+                leading: const Icon(Icons.description_outlined),
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Text(
+                    ocorrencia.titulo != null ? ocorrencia.titulo! : 'Título não disponível',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
-                    subtitle: Text(_formatarData(ocorrencia.data)),
                   ),
-                );
-              },
-            ),
-      // endDrawer: const DrawerNavigation(),
-      // bottomNavigationBar: ButtonNavigation(
-      //   selectedIndex: selectedIndex,
-      //   onItemSelected: (index) {
-      //     setState(() {
-      //       selectedIndex = index;
-      //       // Handle navigation based on index
-      //     });
-      //   },
-      // ),
-    );
+                ),
+                subtitle: Text(
+                  _formatarData(
+                    DateTime.parse(ocorrencia.data!),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+      error: (error, stackTrace) {},
+      loading: () => const Center(child: CircularProgressIndicator()),
+    ));
   }
 }

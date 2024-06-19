@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_playground/pages/controle_diario_create_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Aluno {
+  final int id;
   final String nome;
 
-  Aluno({required this.nome});
+  Aluno({required this.nome, required this.id});
 
   factory Aluno.fromJson(Map<String, dynamic> json) {
-    return Aluno(nome: json['nome']);
+    return Aluno(
+      id: json['id'],
+      nome: json['nome']
+      );
   }
 }
 
@@ -25,7 +30,7 @@ class _ListaAlunosState extends State<ListaAlunos> {
   Future<void> _buscarAlunos() async {
     final response = await Supabase.instance.client
         .from('alunos')
-        .select('nome');
+        .select('nome, id');
        
 
     if (response.isNotEmpty) {
@@ -70,7 +75,7 @@ class _ListaAlunosState extends State<ListaAlunos> {
                   ),
                   title: Text(aluno.nome),
                   onTap: () {
-                    
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ControleDiarioCreate(idAluno: aluno.id),));
                   },
                 );
               },
