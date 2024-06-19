@@ -37,7 +37,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         elevation: 0,
         title: Text(appBarTitles[selectedIndex]), // Título dinâmico da AppBar
       ),
-      drawer: const DrawerNavigation(),
+      drawer: DrawerNavigation(),
       body: pages[selectedIndex], // Conteúdo da página baseado no índice selecionado
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
