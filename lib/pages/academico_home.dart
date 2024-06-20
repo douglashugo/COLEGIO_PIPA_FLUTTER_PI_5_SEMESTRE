@@ -17,7 +17,8 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePage(),
-    DetalheControleDiarioPage(),
+    //DetalheControleDiarioPage(),
+    Container(color: Colors.purple),
     const ListaAlunos()
     
   ];
@@ -37,7 +38,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         elevation: 0,
         title: Text(appBarTitles[selectedIndex]), // Título dinâmico da AppBar
       ),
-      drawer: const DrawerNavigation(),
+      drawer: DrawerNavigation(),
       body: pages[selectedIndex], // Conteúdo da página baseado no índice selecionado
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,

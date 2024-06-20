@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_playground/pages/controle_diario/controle_diario_pais/controle_diario_view.dart';
-import 'package:riverpod_playground/pages/widgets/buttonNavigation.dart';
 import 'package:riverpod_playground/providers/ocorrencias_por_aluno_provider.dart';
 
 class ControleDiarioCreate extends ConsumerWidget {
@@ -56,7 +55,7 @@ class ControleDiarioCreate extends ConsumerWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetalheControleDiarioPage(),
+                            builder: (context) => DetalheControleDiarioPage(postControleDiario: ocorrencia,),
                           ));
                     },
                   ),
