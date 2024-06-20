@@ -59,7 +59,7 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioAdd> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetalheControleDiarioPage(),
+                        builder: (context) => DetalheControleDiarioPage(postControleDiario: ocorrencia,),
                       ),
                     );
                   },

@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:riverpod_playground/domain/ocorrencia_domain.dart';
 
 class DetalheControleDiarioPage extends StatelessWidget {
+  const DetalheControleDiarioPage({super.key, required this.postControleDiario});
 
-  // final String lanche;
-  // final String almoco;
-  // final String jantar;
-  // final String mamadeira1;
-  // final String mamadeira2;
-  // final String mamadeira3;
+  final OcorrenciaDomain postControleDiario;
 
-  // ExibirDadosPage({
-  //   required this.lanche,
-  //   required this.almoco,
-  //   required this.jantar,
-  //   required this.mamadeira1,
-  //   required this.mamadeira2,
-  //   required this.mamadeira3,
-  // });
+  String _formatarData(DateTime data) {
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    return formatter.format(data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +32,21 @@ class DetalheControleDiarioPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            const Center(
+            Center(
               child: Text(
-                '20/04/2024', //pegar a data que foi feita no registro
+                _formatarData(
+                  DateTime.parse(postControleDiario.data!)
+                ), //pegar a data que foi feita no registro
                 style: TextStyle(fontSize: 12),
               ),
             ),
             const SizedBox(height: 20),
-            _buildDataRow('Lanche', 'Ótimo'), //colocar 
-            _buildDataRow('Almoço', 'Regular'),
-            _buildDataRow('Jantar', 'Regular'),
-            _buildDataRow('Primeira mamadeira', 'Ótimo'),
-            _buildDataRow('Segunda mamadeira', 'Ótimo'),
-            _buildDataRow('Terceira mamadeira', 'Regular'),
+            _buildDataRow('Lanche', postControleDiario.lanche!), //colocar 
+            _buildDataRow('Almoço', postControleDiario.almoco!),
+            _buildDataRow('Jantar', postControleDiario.jantar!),
+            _buildDataRow('Primeira mamadeira', postControleDiario.mamadeira!),
+            _buildDataRow('Segunda mamadeira', postControleDiario.mamadeira2!),
+            _buildDataRow('Terceira mamadeira', postControleDiario.mamadeira3!),
           ],
         ),
       ),
