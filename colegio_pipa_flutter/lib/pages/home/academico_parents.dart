@@ -32,7 +32,7 @@ class _AcademicoHomePageParentsState extends State<AcademicoHomePageParents> {
             title: const Text('Home'),
             elevation: 0,
           ),
-          endDrawer: const DrawerNavigation(),
+          endDrawer: DrawerNavigation(),
           body: Column(
             children: [
               Container(

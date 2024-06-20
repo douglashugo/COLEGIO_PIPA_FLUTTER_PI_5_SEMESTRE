@@ -64,7 +64,7 @@ class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
           );
         },
       ),
-      endDrawer: const DrawerNavigation(),
+      endDrawer: DrawerNavigation(),
       bottomNavigationBar: ButtonNavigation(
         selectedIndex: selectedIndex,
         onItemSelected: (index) {

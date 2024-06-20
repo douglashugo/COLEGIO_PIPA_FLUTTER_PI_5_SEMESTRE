@@ -76,7 +76,7 @@ class _ListaAlunosState extends State<ListaAlunos> {
           );
         },
       ),
-      drawer: const DrawerNavigation(),
+      drawer: DrawerNavigation(),
       bottomNavigationBar: ButtonNavigation(
         selectedIndex: selectedIndex,
         onItemSelected: (index) {

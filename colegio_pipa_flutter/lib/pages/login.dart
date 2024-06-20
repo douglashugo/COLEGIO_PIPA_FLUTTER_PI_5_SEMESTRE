@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               SizedBox(
                 height: 150,
-                child: Image.asset('../assets/images/logo-pipa.png'), // Adiciona a imagem do logo
+                child: Image.asset('assets/images/logo-pipa.png'), // Adiciona a imagem do logo
               ),
               const SizedBox(height: 20),
               Card(
