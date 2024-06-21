@@ -1,28 +1,57 @@
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
-//import 'auth_provider.dart';
+import 'package:riverpod_playground/pages/home/academico_home.dart';
+import 'package:riverpod_playground/pages/home/homePais.dart';
+import 'package:supabase/supabase.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class LoginPage extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   String _username = '';
   String _password = '';
   bool _passwordVisible = false;
 
+  final SupabaseClient _supabaseClient = SupabaseClient(
+    dotenv.env['SB_URL']!,
+    dotenv.env['SB_ANON_KEY']!,
+  );
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      // Provider.of<AuthProvider>(context, listen: false).login(_username, _password);
-     //if (Provider.of<AuthProvider>(context, listen: false).isAuthenticated) {
-      //  Navigator.pushReplacementNamed(context, '/home');
-      //} else {
-       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Credenciais inválidas')));
-      //}
+
+      // Verifica o login
+      final response = await _supabaseClient
+          .from('users')
+          .select()
+          .eq('email', _username)
+          .eq('senha', _password)
+          .single();
+
+      final data = response;
+      if (data.isEmpty) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Credenciais inválidas')));
+      } else {
+        final user = data;
+        if (user['admin']) {
+          // Usuário é admin
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const AcademicoHomePage()),
+          );
+        } else {
+          // Usuário é responsável
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const AcademicoPage2()),
+          );
+        }
+      }
     }
   }
 
@@ -31,7 +60,10 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Login', textAlign: TextAlign.center,),
+        title: const Text(
+          'Login',
+          textAlign: TextAlign.center,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,7 +73,8 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               SizedBox(
                 height: 150,
-                child: Image.asset('assets/images/logo-pipa.png'), // Adiciona a imagem do logo
+                child: Image.asset(
+                    '../assets/images/logo-pipa.png'), // Adiciona a imagem do logo
               ),
               const SizedBox(height: 20),
               Card(
@@ -106,7 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: _submit,
                           child: const Text('Login'),
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 50), // Botão ocupa a largura inteira
+                            minimumSize: Size(double.infinity,
+                                50), // Botão ocupa a largura inteira
                           ),
                         ),
                       ],
