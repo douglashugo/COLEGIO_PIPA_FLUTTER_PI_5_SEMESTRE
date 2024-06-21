@@ -61,10 +61,12 @@ class _FormPageState extends ConsumerState<FormPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Dados enviados com sucesso!')),
         );
+        Navigator.of(context).pop(true);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Falha ao enviar os dados: $e')),
         );
+        Navigator.of(context).pop(false);
       }
     }
   }
