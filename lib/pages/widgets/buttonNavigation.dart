@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_playground/pages/academico_home.dart';
+import 'package:riverpod_playground/pages/home/academico_home.dart';
 import 'package:riverpod_playground/pages/controle_diario_create_page.dart';
 
 class ButtonNavigation extends StatelessWidget {

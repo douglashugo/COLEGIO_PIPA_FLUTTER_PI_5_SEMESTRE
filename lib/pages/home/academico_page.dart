@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/domain/aca_category.dart';
 import 'package:riverpod_playground/pages/widgets/loading_widget.dart';
-import '../providers/future_provider.dart';
-import 'widgets/academico_posts_page.dart';
+import '../../providers/future_provider.dart';
+import '../widgets/academico_posts_page.dart';
 
 class AcademicoPage extends ConsumerWidget {
   const AcademicoPage({required this.category, super.key});
