@@ -5,14 +5,14 @@ final kLightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: Colors.deepOrange,
-    accentColor: Colors.blue,
+    accentColor: const Color.fromARGB(255, 243, 149, 33),
   ),
   chipTheme: ChipThemeData.fromDefaults(
     primaryColor: Colors.deepOrange,
     // brightness: Brightness.light,
-    secondaryColor: Colors.blue,
+    secondaryColor: const Color.fromARGB(255, 243, 149, 33),
     labelStyle: const TextStyle(
-      color: Color.fromARGB(255, 0, 0, 0),
+      color: Colors.white,
       fontSize: 12,
     ),
   ),
@@ -24,9 +24,9 @@ final kDarkTheme = ThemeData(
   chipTheme: ChipThemeData.fromDefaults(
     primaryColor: Colors.deepOrange,
     // brightness: Brightness.light,
-    secondaryColor: Colors.blue,
+    secondaryColor: const Color.fromARGB(255, 243, 149, 33),
     labelStyle: const TextStyle(
-      color: Color.fromARGB(97, 0, 0, 0),
+      color: Colors.white,
       fontSize: 12,
     ),
   ),

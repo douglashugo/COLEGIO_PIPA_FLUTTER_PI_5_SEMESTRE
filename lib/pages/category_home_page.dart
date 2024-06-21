@@ -31,7 +31,7 @@ var categories = ref.watch(categoriesProvider);
                     Padding(
                       padding: const EdgeInsets.fromLTRB(18.0, 46.0, 0.0, 6.0),
                       child: Text(
-                        'Olá, Ana!',
+                        'Olá, Beatriz!',
                         style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Colors.white,
                         ),
