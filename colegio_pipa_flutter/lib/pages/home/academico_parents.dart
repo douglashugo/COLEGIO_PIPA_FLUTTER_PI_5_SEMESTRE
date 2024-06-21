@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/pages/widgets/buttonNavigation.dart';
-import 'package:riverpod_playground/pages/widgets/drawer.dart';
+import 'package:riverpod_playground/pages/widgets/drawerUser.dart';
 import 'package:riverpod_playground/pages/widgets/loading_widget.dart';
 import 'package:riverpod_playground/providers/category_provider.dart';
 import 'package:loading_indicator/loading_indicator.dart';
