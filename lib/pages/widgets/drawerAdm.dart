@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/infoEscola.dart';
+import 'package:riverpod_playground/pages/perfil/adm/perfilAdm.dart';
 import 'package:riverpod_playground/pages/perfil/perfilAluno.dart';
 import 'package:riverpod_playground/pages/perfil/perfilConta.dart';
 
-class DrawerNavigation extends StatelessWidget {
-  const DrawerNavigation({super.key});
+class DrawerNavigationAdm extends StatelessWidget {
+  const DrawerNavigationAdm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,33 +18,16 @@ class DrawerNavigation extends StatelessWidget {
       children: [
         const UserAccountsDrawerHeader(
           currentAccountPicture: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/user-flavia.png'),
+            backgroundImage: AssetImage('assets/images/perfil-user.png'),
           ),
 
           decoration: BoxDecoration(color: Colors.deepOrange),
-          accountName: Text('Flávia Romeiro Silva'),
-          accountEmail: Text('flaviabsilva@email.com'),
+          accountName: Text('Beatriz Oliveira'),
+          accountEmail: Text('beatriz.oliveira@email.com'),
 
           //arrowColor: Colors.black,
         ),
 
-        ListTile(
-            leading: const Icon(
-              Icons.face,
-              color: Colors.orange,
-            ),
-            title: const Text("Perfil do aluno"),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const KidProfile(),
-                ),
-              );
-            } //async{
-            //await Navigator.of(context).pushNamed('/myProfile', arguments: myInfoData);
-            //showSenhaConfirmacaoDialog(context: context, email: "");
-            //},
-            ),
 
         ListTile(
             leading: const Icon(
@@ -54,7 +38,7 @@ class DrawerNavigation extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const MyProfilePage(),
+                  builder: (context) => const MyProfilePageAdm(),
                 ),
               );
             } //async {

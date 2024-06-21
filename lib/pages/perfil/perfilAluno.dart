@@ -184,7 +184,7 @@ class KidProfile extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Nome do mãe: Flávio Romeiro Silva'
+                                        'Nome do mãe: Flávia Romeiro Silva'
                                       ),
                                     ),
                                   ],

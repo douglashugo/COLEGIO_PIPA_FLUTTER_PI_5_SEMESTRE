@@ -6,8 +6,8 @@ import 'package:riverpod_playground/pages/home/academico_page.dart';
 import 'package:riverpod_playground/pages/widgets/loading_widget.dart';
 import 'package:riverpod_playground/providers/category_provider.dart';
 
-class CategoryHomePage extends ConsumerWidget {
-  const CategoryHomePage({super.key});
+class CategoryHomePagePais extends ConsumerWidget {
+  const CategoryHomePagePais({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
@@ -31,7 +31,7 @@ var categories = ref.watch(categoriesProvider);
                     Padding(
                       padding: const EdgeInsets.fromLTRB(18.0, 46.0, 0.0, 6.0),
                       child: Text(
-                        'Olá, Beatriz!',
+                        'Olá, Flávia!',
                         style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Colors.white,
                         ),
