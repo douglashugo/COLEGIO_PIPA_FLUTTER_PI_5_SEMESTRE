@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/category_home_page.dart';
-import 'package:riverpod_playground/pages/widgets/drawer.dart';
-import 'controle_diario/controle_diario_pais/controle_diario_view.dart';
+import 'package:riverpod_playground/pages/widgets/drawerUser.dart';
+import 'cardapio.dart';
 import 'controle_diario_list_page.dart';
 
 class AcademicoHomePage extends StatefulWidget {
@@ -17,8 +17,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePage(),
-    //DetalheControleDiarioPage(),
-    Container(color: Colors.purple),
+    Cardapio(),
     const ListaAlunos()
     
   ];

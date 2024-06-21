@@ -1,79 +1,51 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:riverpod_playground/pages/widgets/buttonNavigation.dart';
-import 'package:riverpod_playground/pages/widgets/drawer.dart';
+import 'package:riverpod_playground/pages/widgets/drawerUser.dart';
 import 'package:intl/intl.dart';
 
-class Cardapio {
-  final String cardapio;
-  final DateTime data;
 
-  Cardapio({required this.cardapio, required this.data});
-}
-
-class ControleDiarioCreate extends StatefulWidget {
-  const ControleDiarioCreate({super.key});
-
-  @override
-  State<ControleDiarioCreate> createState() => _ControleDiarioCreateState();
-}
-
-class _ControleDiarioCreateState extends State<ControleDiarioCreate> {
-  int selectedIndex = 2;
-  final List<Cardapio> _cardapio = [
-    Cardapio(cardapio: "Cardápio da semana", data: DateTime.now()),
-    Cardapio(cardapio: "Cardápio da semana", data: DateTime.now().add(const Duration(days: 1))),
-    // Adicione mais cardápios aqui para teste
-  ];
-
-  String _formatarData(DateTime data) {
-    final DateFormat formatter = DateFormat('dd/MM/yyyy');
-    return formatter.format(data);
-  }
-
+class Cardapio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Cardápios'),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text('Cardápios'),
+      // ),
       body: ListView.builder(
-        itemCount: _cardapio.length,
+        itemCount: 10, // Número de itens na lista
         itemBuilder: (context, index) {
-          final cardapio = _cardapio[index];
-          return InkWell(
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
             child: Card(
               child: ListTile(
-                leading: Icon(
-                  Icons.restaurant,
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 4),
+                leading: const Icon(Icons.restaurant_menu),
+                iconColor: Colors.orange,
+                title: const Padding(
+                  padding: EdgeInsets.only(bottom: 8),
                   child: Text(
-                    cardapio.cardapio,
-                    style: const TextStyle(
+                    'Cardápio da semana',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                subtitle: Text(_formatarData(cardapio.data)),
+                subtitle: const Text(
+                  'Data: 17/06/2024',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                onTap: () {
+                  // Ação ao clicar no item (não implementada)
+                },
               ),
             ),
-            //onTap: , colocar para abrir o cardapio
           );
         },
       ),
-      endDrawer: DrawerNavigation(),
-      bottomNavigationBar: ButtonNavigation(
-        selectedIndex: selectedIndex,
-        onItemSelected: (index) {
-          setState(() {
-            selectedIndex = index;
-            // Handle navigation based on index
-          });
-        },
-      ),
+      endDrawer: const DrawerNavigation(),
+      
     );
   }
 }
