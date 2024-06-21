@@ -77,7 +77,7 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioAdd> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FormPage(), // Página de cadastro
+              builder: (context) => FormPage(idAluno: widget.idAluno!,), // Página de cadastro
             ),
           );
         },

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_playground/domain/create_ocorrencia_domain.dart';
+import 'package:riverpod_playground/providers/create_ocorrencia.dart';
 
-class FormPage extends StatefulWidget {
+class FormPage extends ConsumerStatefulWidget {
+  final int idAluno;
+
+  const FormPage({Key? key, required this.idAluno}) : super(key: key);
+
   @override
   _FormPageState createState() => _FormPageState();
 }
 
-class _FormPageState extends State<FormPage> {
+class _FormPageState extends ConsumerState<FormPage> {
   final _formKey = GlobalKey<FormState>();
   String _cafe = 'Regular';
   String _lanche = 'Regular';
@@ -16,38 +21,49 @@ class _FormPageState extends State<FormPage> {
   String _mamadeira1 = 'Regular';
   String _mamadeira2 = 'Regular';
   String _mamadeira3 = 'Regular';
+  String _evacuacao = 'Regular';
+  bool _xixi = false;
+  bool _dormiu = false;
+  bool _banho = false;
+  String _horario = '';
+  String _dose = '';
+  double _febre = 0.0;
+  String _nome_responsavel = '';
 
   Future<void> _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
-      // Dados do formulário
-      final Map<String, String> formData = {
-        'cafe': _cafe,
-        'lanche': _lanche,
-        'almoco': _almoco,
-        'jantar': _jantar,
-        'mamadeira1': _mamadeira1,
-        'mamadeira2': _mamadeira2,
-        'mamadeira3': _mamadeira3,
-      };
-
-      // Enviar os dados via POST
-      final response = await http.post(
-        Uri.parse(''),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(formData),
+      // Create OcorrenciaDomain object with form data
+      final ocorrencia = CreateOcorrenciaDomain(
+        data: DateTime.now().toIso8601String(),
+        titulo: 'Ocorrência', // Replace with actual title if needed
+        alunoId: widget.idAluno, // Use idAluno from widget
+        lanche: _lanche,
+        almoco: _almoco,
+        lanchetarde: _cafe,
+        jantar: _jantar,
+        mamadeira: _mamadeira1,
+        mamadeira2: _mamadeira2,
+        mamadeira3: _mamadeira3,
+        evacuacao: _evacuacao,
+        xixi: _xixi,
+        dormiu: _dormiu,
+        banho: _banho,
+        horario: _horario,
+        dose: _dose,
+        febre: _febre,
+        nome_responsavel: _nome_responsavel,
       );
 
-      if (response.statusCode == 200) {
+      try {
+        await ref.read(inserirOcorrenciaProvider(ocorrencia).future);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Dados enviados com sucesso!')),
+          const SnackBar(content: Text('Dados enviados com sucesso!')),
         );
-      } else {
+      } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Falha ao enviar os dados!')),
+          SnackBar(content: Text('Falha ao enviar os dados: $e')),
         );
       }
     }
@@ -57,81 +73,126 @@ class _FormPageState extends State<FormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Controle Diário'),
+        title: const Text('Controle Diário'),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-           child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    const Center(
-                      child: Text(
-                        'Alimentação',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Center(
+                    child: Text(
+                      'Alimentação',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20),
-                    _buildSegmentedControl('Café da manhã', _cafe, (newValue) {
-                      setState(() {
-                        _cafe = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Lanche', _lanche, (newValue) {
-                      setState(() {
-                        _lanche = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Almoço', _almoco, (newValue) {
-                      setState(() {
-                        _almoco = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Jantar', _jantar, (newValue) {
-                      setState(() {
-                        _jantar = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Primeira mamadeira', _mamadeira1, (newValue) {
-                      setState(() {
-                        _mamadeira1 = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Segunda mamadeira', _mamadeira2, (newValue) {
-                      setState(() {
-                        _mamadeira2 = newValue;
-                      });
-                    }),
-                    _buildSegmentedControl('Terceira mamadeira', _mamadeira3, (newValue) {
-                      setState(() {
-                        _mamadeira3 = newValue;
-                      });
-                    }),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _submit,
-                      child: const Text('Enviar'),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                      ),
+                  ),
+                  const SizedBox(height: 20),
+                  _buildSegmentedControl('Café da manhã', _cafe, (newValue) {
+                    setState(() {
+                      _cafe = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Lanche', _lanche, (newValue) {
+                    setState(() {
+                      _lanche = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Almoço', _almoco, (newValue) {
+                    setState(() {
+                      _almoco = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Jantar', _jantar, (newValue) {
+                    setState(() {
+                      _jantar = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Primeira mamadeira', _mamadeira1,
+                      (newValue) {
+                    setState(() {
+                      _mamadeira1 = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Segunda mamadeira', _mamadeira2,
+                      (newValue) {
+                    setState(() {
+                      _mamadeira2 = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Terceira mamadeira', _mamadeira3,
+                      (newValue) {
+                    setState(() {
+                      _mamadeira3 = newValue;
+                    });
+                  }),
+                  _buildSegmentedControl('Evacuação', _evacuacao, (newValue) {
+                    setState(() {
+                      _evacuacao = newValue;
+                    });
+                  }),
+                  const SizedBox(height: 20),
+                  _buildCheckbox('Fez xixi', _xixi, (newValue) {
+                    setState(() {
+                      _xixi = newValue;
+                    });
+                  }),
+                  _buildCheckbox('Dormiu', _dormiu, (newValue) {
+                    setState(() {
+                      _dormiu = newValue;
+                    });
+                  }),
+                  _buildCheckbox('Tomou banho', _banho, (newValue) {
+                    setState(() {
+                      _banho = newValue;
+                    });
+                  }),
+                  _buildTextInput('Horário', (newValue) {
+                    setState(() {
+                      _horario = newValue;
+                    });
+                  }),
+                  _buildTextInput('Dose', (newValue) {
+                    setState(() {
+                      _dose = newValue;
+                    });
+                  }),
+                  _buildTextInput('Febre (em °C)', (newValue) {
+                    setState(() {
+                      _febre = double.tryParse(newValue) ?? 0.0;
+                    });
+                  }),
+                  _buildTextInput('Nome do responsável', (newValue) {
+                    setState(() {
+                      _nome_responsavel = newValue;
+                    });
+                  }),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    child: const Text('Enviar'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSegmentedControl(String title, String currentValue, ValueChanged<String> onValueChanged) {
+  Widget _buildSegmentedControl(
+      String title, String currentValue, ValueChanged<String> onValueChanged) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -150,15 +211,15 @@ class _FormPageState extends State<FormPage> {
           ),
           segments: const [
             ButtonSegment(
-              value: 'Ruim',
-              label: Text('Ruim'),
+              value: 'recusei',
+              label: Text('Recusei'),
             ),
             ButtonSegment(
-              value: 'Regular',
+              value: 'regular',
               label: Text('Regular'),
             ),
             ButtonSegment(
-              value: 'Ótimo',
+              value: 'otimo',
               label: Text('Ótimo'),
             ),
           ],
@@ -166,10 +227,25 @@ class _FormPageState extends State<FormPage> {
           onSelectionChanged: (Set<String> newSelection) {
             onValueChanged(newSelection.first);
           },
-          
         ),
         const SizedBox(height: 20),
       ],
+    );
+  }
+
+  Widget _buildTextInput(String label, ValueChanged<String> onSaved) {
+    return TextFormField(
+      decoration: InputDecoration(labelText: label),
+      onSaved: (value) => onSaved(value ?? ''),
+    );
+  }
+
+  Widget _buildCheckbox(
+      String label, bool currentValue, ValueChanged<bool> onChanged) {
+    return CheckboxListTile(
+      title: Text(label),
+      value: currentValue,
+      onChanged: (value) => onChanged(value ?? false),
     );
   }
 }
