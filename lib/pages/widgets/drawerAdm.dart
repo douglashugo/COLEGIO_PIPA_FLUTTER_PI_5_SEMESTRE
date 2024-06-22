@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/infoEscola.dart';
+import 'package:riverpod_playground/pages/login.dart';
 import 'package:riverpod_playground/pages/perfil/adm/perfilAdm.dart';
 import 'package:riverpod_playground/pages/perfil/perfilAluno.dart';
 import 'package:riverpod_playground/pages/perfil/perfilConta.dart';
@@ -28,7 +29,6 @@ class DrawerNavigationAdm extends StatelessWidget {
           //arrowColor: Colors.black,
         ),
 
-
         ListTile(
             leading: const Icon(
               Icons.account_circle,
@@ -51,28 +51,28 @@ class DrawerNavigationAdm extends StatelessWidget {
             ),
 
         ListTile(
-          leading: const Icon(
-            // Icons.person_2_outlined,
-            Icons.school,
-            color: Colors.orange,
-          ),
-          title: const Text("Informações do Colégio"),
-          //  title: const Text("Editar Perfil"),
-          onTap: () {
+            leading: const Icon(
+              // Icons.person_2_outlined,
+              Icons.school,
+              color: Colors.orange,
+            ),
+            title: const Text("Informações do Colégio"),
+            //  title: const Text("Editar Perfil"),
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const InfoEscola(),
                 ),
               );
-            }//async {
+            } //async {
             //Navigator.of(context).pop();
             //await Navigator.of(context).pushNamed('/updateProfile', arguments: myInfoData);
             // ref.invalidate(getMeProvider);
             // ref.invalidate(homeAdmVmProvider);
 
             //showSenhaConfirmacaoDialog(context: context, email: "");
-          //},
-        ),
+            //},
+            ),
 
         ListTile(
           // leading: const Icon(
@@ -135,9 +135,12 @@ class DrawerNavigationAdm extends StatelessWidget {
                   size: 32,
                 ),
                 title: const Text("Sair"),
-                onTap: () {
-                  //ref.read(homeAdmVmProvider.notifier).logout();
-                },
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Login(),
+                  ),
+                ),
               ),
             ],
           ),
