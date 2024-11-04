@@ -2,16 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_playground/domain/ocorrencia_domain.dart';
 
-class DetalheControleDiarioPage extends StatelessWidget {
-  const DetalheControleDiarioPage({Key? key, required this.postControleDiario})
-      : super(key: key);
-
-  final OcorrenciaDomain postControleDiario;
-
-  String _formatarData(DateTime data) {
-    final DateFormat formatter = DateFormat('dd/MM/yyyy');
-    return formatter.format(data);
-  }
+class DetalheControleDiarioViz extends StatelessWidget {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +26,27 @@ class DetalheControleDiarioPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              Center(
+              const Center(
                 child: Text(
-                  _formatarData(DateTime.parse(postControleDiario.data!)),
-                  style: const TextStyle(fontSize: 12),
+                 '10/06/2024',
+                  style: TextStyle(fontSize: 12),
                 ),
               ),
               const SizedBox(height: 20),
-              _buildDataRow('Responsável', postControleDiario.nome_responsavel!),
-              _buildDataRow('Lanche', postControleDiario.lanche!),
-              _buildDataRow('Almoço', postControleDiario.almoco!),
-              _buildDataRow('Jantar', postControleDiario.jantar!),
-              _buildDataRow('Primeira mamadeira', postControleDiario.mamadeira!),
-              _buildDataRow('Segunda mamadeira', postControleDiario.mamadeira2!),
-              _buildDataRow('Terceira mamadeira', postControleDiario.mamadeira3!),
-              _buildDataRow('Evacuação', postControleDiario.evacuacao!),
-              _buildDataRow('Xixi', postControleDiario.xixi! ? 'Sim' : 'Não'),
-              _buildDataRow('Dormiu', postControleDiario.dormiu! ? 'Sim' : 'Não'),
-              _buildDataRow('Banho', postControleDiario.banho! ? 'Sim' : 'Não'),
-              _buildDataRow('Horário', postControleDiario.horario!),
-              _buildDataRow('Dose', postControleDiario.dose!.toString()),
-              _buildDataRow('Febre', postControleDiario.febre!.toString()),
+              _buildDataRow('Responsável', 'Flávia'),
+              _buildDataRow('Lanche', 'Recusou'),
+              _buildDataRow('Almoço', 'Ótimo'),
+              _buildDataRow('Jantar', 'Ótimo'),
+              _buildDataRow('Primeira mamadeira', 'Recusou'),
+              _buildDataRow('Segunda mamadeira', 'Regular'),
+              _buildDataRow('Terceira mamadeira', 'Ótimo'),
+              _buildDataRow('Evacuação', 'Sim'),
+              _buildDataRow('Xixi', 'Sim'),
+              _buildDataRow('Dormiu', 'Não'),
+              _buildDataRow('Banho', 'Não'),
+              _buildDataRow('Horário', '10 horas'),
+              _buildDataRow('Dose', '5ml'),
+              _buildDataRow('Febre', 'Não'),
             ],
           ),
         ),

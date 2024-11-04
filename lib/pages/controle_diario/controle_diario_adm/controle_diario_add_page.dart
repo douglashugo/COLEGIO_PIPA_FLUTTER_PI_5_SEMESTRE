@@ -13,7 +13,8 @@ class ControleDiarioAdd extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ControleDiarioAdd> createState() => _ControleDiarioCreateState();
+  ConsumerState<ControleDiarioAdd> createState() =>
+      _ControleDiarioCreateState();
 }
 
 class _ControleDiarioCreateState extends ConsumerState<ControleDiarioAdd> {
@@ -59,7 +60,9 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioAdd> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetalheControleDiarioPage(postControleDiario: ocorrencia,),
+                        builder: (context) => DetalheControleDiarioPage(
+                          postControleDiario: ocorrencia,
+                        ),
                       ),
                     );
                   },
@@ -72,14 +75,20 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioAdd> {
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor:  const Color.fromARGB(255, 243, 149, 33),
-        onPressed: () {
-          Navigator.push(
+        backgroundColor: const Color.fromARGB(255, 243, 149, 33),
+        onPressed: () async {
+          bool result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FormPage(), // Página de cadastro
+              builder: (context) => FormPage(
+                idAluno: widget.idAluno!,
+              ), // Página de cadastro
             ),
           );
+
+          if (result) {
+            ref.invalidate(ocorrenciasPorAlunoProvider(widget.idAluno!));
+          }
         },
         child: Icon(Icons.add),
       ),

@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_playground/domain/ocorrencia_domain.dart';
 import 'package:riverpod_playground/providers/app_providers.dart';
-
 import '../pages/controle_diario_create_page.dart';
 
 part 'ocorrencias_por_aluno_provider.g.dart';
@@ -17,3 +16,4 @@ FutureOr<List<OcorrenciaDomain>> ocorrenciasPorAluno(OcorrenciasPorAlunoRef ref,
 
   return response.map((e) => OcorrenciaDomain.fromMap(e)).toList();
 }
+

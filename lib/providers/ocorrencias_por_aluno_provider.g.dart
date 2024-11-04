@@ -7,7 +7,7 @@ part of 'ocorrencias_por_aluno_provider.dart';
 // **************************************************************************
 
 String _$ocorrenciasPorAlunoHash() =>
-    r'ef61de6660716b74a6a0ea271e1b871e4dd6f757';
+    r'0027b222f7f0425352d8e789eeec4f7db39a4aed';
 
 /// Copied from Dart SDK
 class _SystemHash {

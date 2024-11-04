@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/category_home_page.dart';
-import 'package:riverpod_playground/pages/widgets/drawer.dart';
-import 'controle_diario/controle_diario_pais/controle_diario_view.dart';
-import 'controle_diario_list_page.dart';
+import 'package:riverpod_playground/pages/controle_diario/controle_diario_pais/controleListPais.dart';
+import 'package:riverpod_playground/pages/widgets/categoryHomePagePais.dart';
+import 'package:riverpod_playground/pages/widgets/drawerAdm.dart';
+import 'package:riverpod_playground/pages/widgets/drawerUser.dart';
+import '../cardapio.dart';
+import '../controle_diario_list_page.dart';
 
-class AcademicoHomePage extends StatefulWidget {
-  const AcademicoHomePage({Key? key}) : super(key: key);
+class AcademicoPage2 extends StatefulWidget {
+  const AcademicoPage2({Key? key}) : super(key: key);
 
   @override
   _AcademicoHomePageState createState() => _AcademicoHomePageState();
 }
 
-class _AcademicoHomePageState extends State<AcademicoHomePage> {
+class _AcademicoHomePageState extends State<AcademicoPage2> {
   int selectedIndex = 0;
 
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
-    const CategoryHomePage(),
-    //DetalheControleDiarioPage(),
-    Container(color: Colors.purple),
-    const ListaAlunos()
+    const CategoryHomePagePais(),
+    Cardapio(),
+    const ControleDiarioList() //ENVIAR PARA LISTA DE OCORRENCIAS
     
   ];
 
@@ -38,7 +40,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         elevation: 0,
         title: Text(appBarTitles[selectedIndex]), // Título dinâmico da AppBar
       ),
-      drawer: DrawerNavigation(),
+      drawer: const DrawerNavigation(),
       body: pages[selectedIndex], // Conteúdo da página baseado no índice selecionado
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
