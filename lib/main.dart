@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/core/contants.dart';
-import 'package:riverpod_playground/pages/home/academico_home.dart';
-import 'package:riverpod_playground/pages/home/academico_page.dart';
-import 'package:riverpod_playground/pages/home/homePais.dart';
+import 'package:riverpod_playground/features/poc/app.dart';
 import 'package:riverpod_playground/pages/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -30,7 +28,9 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Colégio PIPA',
       theme: ref.watch(themeSwitchProvider) ? kLightTheme : kDarkTheme,
-      home: Login(),
+      home: App(),
     );
   }
 }
+
+
