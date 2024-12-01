@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/core/contants.dart';
-import 'package:riverpod_playground/pages/home/academico_home.dart';
-import 'package:riverpod_playground/pages/home/academico_page.dart';
-import 'package:riverpod_playground/pages/home/homePais.dart';
 import 'package:riverpod_playground/pages/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import 'providers/app_providers.dart';
 
 void main() async {

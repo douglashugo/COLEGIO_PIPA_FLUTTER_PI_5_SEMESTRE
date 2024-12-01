@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/controle_diario/controle_diario_adm/controle_diario_add_page.dart';
-import 'package:riverpod_playground/pages/controle_diario_create_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Aluno {
