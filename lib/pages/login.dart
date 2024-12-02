@@ -24,33 +24,73 @@ class _LoginState extends State<Login> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
 
-      // Verifica o login
-      final response = await _supabaseClient
-          .from('users')
-          .select()
-          .eq('email', _username)
-          .eq('senha', _password)
-          .single();
+      try {
+        // Verifica o login
+        final response = await _supabaseClient
+            .from('users')
+            .select()
+            .eq('email', _username)
+            .eq('senha', _password)
+            .maybeSingle();
 
-      final data = response;
-      if (data.isEmpty) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Credenciais inválidas')));
-      } else {
-        final user = data;
-        if (user['admin']) {
-          // Usuário é admin
+        final user = response;
+
+        if (user == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Credenciais inválidas')),
+          );
+          return;
+        }
+
+        // Consulta as permissões do usuário
+        final rolesResponse = await _supabaseClient
+            .from('user_roles')
+            .select('roles(name)')
+            .eq('user_id', user['id']);
+
+        final rolesData = rolesResponse as List<dynamic>;
+
+        if (rolesData.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Nenhuma permissão atribuída ao usuário')),
+          );
+          return;
+        }
+
+        // Redireciona com base na permissão
+        final roles = rolesData.map((role) => role['roles']['name']).toList();
+
+        if (roles.contains('admin')) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AcademicoHomePage()),
+            MaterialPageRoute(
+              builder: (context) => AcademicoHomePage(user: user),
+            ),
+          );
+        } else if (roles.contains('professor')) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AcademicoHomePage(user: user),
+            ),
+          );
+        } else if (roles.contains('responsavel')) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AcademicoHomePage(user: user),
+            ),
           );
         } else {
-          // Usuário é responsável
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const AcademicoPage2()),
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Permissão desconhecida')),
           );
         }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao fazer login: $e')),
+        );
       }
     }
   }
@@ -73,8 +113,7 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               SizedBox(
                 height: 150,
-                child: Image.asset(
-                    'assets/images/logo-pipa.png'), // Adiciona a imagem do logo
+                child: Image.asset('assets/images/logo-pipa.png'),
               ),
               const SizedBox(height: 20),
               Card(
@@ -139,8 +178,8 @@ class _LoginState extends State<Login> {
                           onPressed: _submit,
                           child: const Text('Login'),
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity,
-                                50), // Botão ocupa a largura inteira
+                            minimumSize: const Size(
+                                double.infinity, 50), // Largura total
                           ),
                         ),
                       ],
