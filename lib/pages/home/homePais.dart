@@ -8,7 +8,9 @@ import '../cardapio.dart';
 import '../controle_diario_list_page.dart';
 
 class AcademicoPage2 extends StatefulWidget {
-  const AcademicoPage2({Key? key}) : super(key: key);
+  final Map<String, dynamic> user;
+
+  const AcademicoPage2({Key? key, required this.user}) : super(key: key);
 
   @override
   _AcademicoHomePageState createState() => _AcademicoHomePageState();

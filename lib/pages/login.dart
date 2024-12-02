@@ -52,7 +52,8 @@ class _LoginState extends State<Login> {
 
         if (rolesData.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Nenhuma permissão atribuída ao usuário')),
+            const SnackBar(
+                content: Text('Nenhuma permissão atribuída ao usuário')),
           );
           return;
         }
@@ -63,17 +64,23 @@ class _LoginState extends State<Login> {
         if (roles.contains('admin')) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AcademicoHomePage()),
+            MaterialPageRoute(
+              builder: (context) => AcademicoHomePage(user: user),
+            ),
           );
         } else if (roles.contains('professor')) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AcademicoHomePage()),
+            MaterialPageRoute(
+              builder: (context) => AcademicoHomePage(user: user),
+            ),
           );
         } else if (roles.contains('responsavel')) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AcademicoPage2()),
+            MaterialPageRoute(
+              builder: (context) => AcademicoPage2(user: user),
+            ),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -171,8 +178,8 @@ class _LoginState extends State<Login> {
                           onPressed: _submit,
                           child: const Text('Login'),
                           style: ElevatedButton.styleFrom(
-                            minimumSize:
-                                const Size(double.infinity, 50), // Largura total
+                            minimumSize: const Size(
+                                double.infinity, 50), // Largura total
                           ),
                         ),
                       ],
