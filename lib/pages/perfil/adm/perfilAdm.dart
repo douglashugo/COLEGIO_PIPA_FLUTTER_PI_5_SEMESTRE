@@ -151,7 +151,7 @@ class MyProfilePageAdm extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
-                          return const Padding(
+                          return Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: [
@@ -162,7 +162,9 @@ class MyProfilePageAdm extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Endereço: Rua Tiradentes, 456',
+                                        '${user['endereco']?['rua'] ?? ''} - '
+                                        '${user['endereco']?['numero'] ?? ''} - '
+                                        '${user['endereco']?['bairro'] ?? ''}',
                                         
                                       ),
                                     ),
@@ -175,7 +177,7 @@ class MyProfilePageAdm extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Contato | WhatsApp: (19) 98765-2341',
+                                        'Contato | WhatsApp: ${user['telefone'] ?? ''}',
                                         
                                       ),
                                     ),

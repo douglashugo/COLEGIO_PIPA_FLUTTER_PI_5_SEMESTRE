@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/category_home_page.dart';
+import 'package:riverpod_playground/pages/salas.dart';
 import 'package:riverpod_playground/pages/widgets/drawerAdm.dart';
-import 'package:riverpod_playground/pages/widgets/drawerUser.dart';
 import '../cardapio.dart';
-import '../controle_diario_list_page.dart';
 
 class AcademicoHomePage extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -32,8 +31,8 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
     // Inicializa a lista de páginas dinamicamente
     pages = [
       CategoryHomePage(user: widget.user), // Passando os dados do usuário
-      Cardapio(),
-      const ListaAlunos(),
+      Cardapio(), // Página estática
+      ListaSalasPage(userId: widget.user['id'] as String), // Passa o ID do usuário (String)
     ];
   }
 
@@ -45,7 +44,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         elevation: 0,
         title: Text(appBarTitles[selectedIndex]), // Título dinâmico da AppBar
       ),
-      drawer: DrawerNavigationAdm(user: widget.user),
+      drawer: DrawerNavigationAdm(user: widget.user), // Drawer com dados do usuário
       body: pages[selectedIndex], // Conteúdo da página baseado no índice selecionado
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
@@ -67,7 +66,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
           ),
           NavigationDestination(
             icon: Icon(Icons.bookmark),
-            label: 'Controle Diario',
+            label: 'Controle Diário',
             selectedIcon: Icon(Icons.bookmark),
           ),
         ],
