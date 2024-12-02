@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => AcademicoPage2(user: user),
+              builder: (context) => AcademicoHomePage(user: user),
             ),
           );
         } else {

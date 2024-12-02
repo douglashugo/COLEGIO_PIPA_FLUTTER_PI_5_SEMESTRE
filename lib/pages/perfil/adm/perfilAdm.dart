@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyProfilePageAdm extends StatelessWidget {
-  const MyProfilePageAdm({super.key});
+  final Map<String, dynamic> user;
+
+  const MyProfilePageAdm({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class MyProfilePageAdm extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   padding: const EdgeInsets.all(4),
                  
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -77,7 +79,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          'Beatriz Oliveira',
+                          user['nome'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: TextStyle(
@@ -97,7 +99,7 @@ class MyProfilePageAdm extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   padding: const EdgeInsets.all(10),
                   
-                  child: const Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -114,7 +116,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                          padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          'beatriz.oliveira@email.com',
+                          user['email'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: TextStyle(
