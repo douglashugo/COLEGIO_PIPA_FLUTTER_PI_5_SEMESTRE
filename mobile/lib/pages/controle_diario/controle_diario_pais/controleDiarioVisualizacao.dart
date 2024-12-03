@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_playground/domain/ocorrencia_domain.dart';
+// import 'package:riverpod_playground/domain/ocorrencia_domain.dart';
+import 'package:academico_core/src/features/post/domain/model/ocorrencia_domain.dart';
 
 class DetalheControleDiarioViz extends StatelessWidget {
   

@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tag.dart';
+part of 'aca_tag.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TagImpl _$$TagImplFromJson(Map<String, dynamic> json) => _$TagImpl(
+AcaTag _$AcaTagFromJson(Map<String, dynamic> json) => AcaTag(
       id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
     );
 
-Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$AcaTagToJson(AcaTag instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
     };

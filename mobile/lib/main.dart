@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_playground/core/contants.dart';
+import 'package:riverpod_playground/pages/controle_diario/controle_diario_pais/controleDiarioVisualizacao.dart';
 import 'package:riverpod_playground/pages/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'providers/app_providers.dart';
+/*import 'providers/app_providers.dart';*/
+import 'package:academico_core/src/features/post/providers/app_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +28,7 @@ class App extends ConsumerWidget {
     return MaterialApp(
       title: 'Colégio PIPA',
       theme: ref.watch(themeSwitchProvider) ? kLightTheme : kDarkTheme,
-      home: const Login(),
+      home: Login(),
     );
   }
 }

@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category.dart';
+part of 'aca_category.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CategoryImpl _$$CategoryImplFromJson(Map<String, dynamic> json) =>
-    _$CategoryImpl(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      image: json['image'] as String,
+AcaCategory _$AcaCategoryFromJson(Map<String, dynamic> json) => AcaCategory(
+      id: (json['id'] as num?)?.toInt(),
+      title: json['title'] as String?,
+      image: json['image'] as String?,
     );
 
-Map<String, dynamic> _$$CategoryImplToJson(_$CategoryImpl instance) =>
+Map<String, dynamic> _$AcaCategoryToJson(AcaCategory instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'title': instance.title,
       'image': instance.image,
     };
