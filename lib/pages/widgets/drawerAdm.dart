@@ -6,9 +6,9 @@ import 'package:riverpod_playground/pages/perfil/perfilAluno.dart';
 import 'package:riverpod_playground/pages/perfil/perfilConta.dart';
 
 class DrawerNavigationAdm extends StatelessWidget {
-  final Map<String, dynamic> user;
+  final Map<String, dynamic> userData;
 
-  const DrawerNavigationAdm({super.key, required this.user});
+  const DrawerNavigationAdm({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class DrawerNavigationAdm extends StatelessWidget {
           ),
 
           decoration: BoxDecoration(color: Colors.deepOrange),
-          accountName: Text(user['nome'] ?? 'Usuário'), // Nome dinâmico
-          accountEmail: Text(user['email'] ?? 'Email não disponível'), // Email dinâmico
+          accountName: Text(userData['user']['nome'] ?? 'Usuário'), // Nome dinâmico
+          accountEmail: Text(userData['user']['email'] ?? 'Email não disponível'), // Email dinâmico
 
           //arrowColor: Colors.black,
         ),
@@ -40,7 +40,7 @@ class DrawerNavigationAdm extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MyProfilePageAdm(user: user),
+                  builder: (context) => MyProfilePageAdm(userData: userData),
                 ),
               );
             } //async {

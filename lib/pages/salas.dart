@@ -4,13 +4,13 @@ import 'package:riverpod_playground/pages/listar_alunos_adm.dart';
 import 'package:riverpod_playground/providers/salas_provider.dart';
 
 class ListaSalasPage extends ConsumerWidget {
-  final String userId; // ID do professor como String
+  final Map<String, dynamic> userData; // Dados do usuário e roles
 
-  const ListaSalasPage({super.key, required this.userId});
+  const ListaSalasPage({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final salasAsync = ref.watch(salasProvider(userId));
+    final salasAsync = ref.watch(salasProvider(userData)); // Passa userData para o provider
 
     return Scaffold(
       body: salasAsync.when(
@@ -22,7 +22,7 @@ class ListaSalasPage extends ConsumerWidget {
               leading: const Icon(Icons.meeting_room),
               title: Text(sala.nome),
               onTap: () {
-                // Navega para a página ListaAlunos passando o ID da sala
+                // Navega para a página ListaAlunosAdm passando o ID da sala
                 Navigator.push(
                   context,
                   MaterialPageRoute(
