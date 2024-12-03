@@ -5,7 +5,6 @@ import 'package:riverpod_playground/core/contants.dart';
 import 'package:riverpod_playground/pages/login.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'providers/app_providers.dart';
-
 void main() async {
   
   WidgetsFlutterBinding.ensureInitialized();

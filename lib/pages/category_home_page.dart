@@ -7,8 +7,8 @@ import 'package:riverpod_playground/pages/widgets/loading_widget.dart';
 import 'package:riverpod_playground/providers/category_provider.dart';
 
 class CategoryHomePage extends ConsumerWidget {
-  final Map<String, dynamic> user;
-  const CategoryHomePage({super.key, required this.user});
+  final Map<String, dynamic> userData;
+  const CategoryHomePage({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +33,7 @@ var categories = ref.watch(categoriesProvider);
                     Padding(
                       padding: const EdgeInsets.fromLTRB(18.0, 46.0, 0.0, 6.0),
                       child: Text(
-                        'Olá, ${user['nome'].split(' ')[0]}!',
+                        'Olá, ${userData['user']['nome'].split(' ')[0]}!',
                         style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Colors.white,
                         ),

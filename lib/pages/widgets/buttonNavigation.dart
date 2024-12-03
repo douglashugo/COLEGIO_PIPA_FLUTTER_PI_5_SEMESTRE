@@ -5,20 +5,20 @@ import 'package:riverpod_playground/pages/controle_diario_create_page.dart';
 class ButtonNavigation extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
-  final Map<String, dynamic> user; // Adiciona o parâmetro user
+  final Map<String, dynamic> userData; // Adiciona o parâmetro user
 
   const ButtonNavigation({
     super.key,
     required this.selectedIndex,
     required this.onItemSelected,
-    required this.user, // Torna obrigatório
+    required this.userData, // Torna obrigatório
   });
 
   void _navigateToScreen(BuildContext context, int index) {
     if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AcademicoHomePage(user: user)),
+        MaterialPageRoute(builder: (context) => AcademicoHomePage(userData: userData)),
       );
     } else if (index == 2) {
       Navigator.push(

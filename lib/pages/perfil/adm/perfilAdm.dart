@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyProfilePageAdm extends StatelessWidget {
-  final Map<String, dynamic> user;
+  final Map<String, dynamic> userData;
 
-  const MyProfilePageAdm({super.key, required this.user});
+  const MyProfilePageAdm({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          user['nome'],
+                          userData['user']['nome'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: TextStyle(
@@ -116,7 +116,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                          padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          user['email'],
+                          userData['user']['email'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: TextStyle(
@@ -162,9 +162,9 @@ class MyProfilePageAdm extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${user['endereco']?['rua'] ?? ''} - '
-                                        '${user['endereco']?['numero'] ?? ''} - '
-                                        '${user['endereco']?['bairro'] ?? ''}',
+                                        '${userData['user']['endereco']?['rua'] ?? ''} - '
+                                        '${userData['user']['endereco']?['numero'] ?? ''} - '
+                                        '${userData['user']['endereco']?['bairro'] ?? ''}',
                                         
                                       ),
                                     ),
@@ -177,7 +177,7 @@ class MyProfilePageAdm extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Contato | WhatsApp: ${user['telefone'] ?? ''}',
+                                        'Contato | WhatsApp: ${userData['user']['telefone'] ?? ''}',
                                         
                                       ),
                                     ),

@@ -58,35 +58,22 @@ class _LoginState extends State<Login> {
           return;
         }
 
-        // Redireciona com base na permissão
+        // Extrai as permissões
         final roles = rolesData.map((role) => role['roles']['name']).toList();
 
-        if (roles.contains('admin')) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AcademicoHomePage(user: user),
-            ),
-          );
-        } else if (roles.contains('professor')) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AcademicoHomePage(user: user),
-            ),
-          );
-        } else if (roles.contains('responsavel')) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AcademicoHomePage(user: user),
-            ),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Permissão desconhecida')),
-          );
-        }
+        // Cria um objeto com o usuário e as permissões
+        final userWithRoles = {
+          'user': user,
+          'roles': roles,
+        };
+
+        // Redireciona com base na permissão
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AcademicoHomePage(userData: userWithRoles),
+          ),
+        );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Erro ao fazer login: $e')),
