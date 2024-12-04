@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:riverpod_playground/pages/controle_diario/controle_diario_adm/controle_diario_registro.dart';
+import 'package:riverpod_playground/domain/aca_students.dart'; // Importa o modelo Aluno
+import 'package:riverpod_playground/providers/alunos_responsavel_provider.dart'; // Importa o provider
 import 'package:riverpod_playground/pages/controle_diario/controle_diario_pais/controleDiarioVisualizacao.dart';
-import 'package:riverpod_playground/pages/controle_diario/controle_diario_pais/controle_diario_view.dart';
-import 'package:riverpod_playground/providers/ocorrencias_por_aluno_provider.dart';
 
 class ControleDiarioList extends ConsumerStatefulWidget {
-  final int? idAluno;
+  final String userId; // Agora o userId é uma String
+  final Map<String, dynamic> userData; // Dados do usuário
+
   const ControleDiarioList({
     super.key,
-    this.idAluno,
+    required this.userId,
+    required this.userData,
   });
 
   @override
@@ -25,52 +27,57 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioList> {
 
   @override
   Widget build(BuildContext context) {
-   // final ocorrencias = ref.watch(ocorrenciasPorAlunoProvider(widget.idAluno!));
+    // Consumindo os dados do provider
+    final alunosAsyncValue = ref.watch(alunosResponsavelProvider(widget.userId));
+
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text('Controle Diário'),
-      // ),
-      body: 
-      // ocorrencias.when(
-      //   data: (data) {
-      //     return 
-          ListView.builder(
-            itemCount: 10, //data.length,
+      appBar: AppBar(
+        title: Text('Alunos de ${widget.userData['user']['nome']}'),
+        centerTitle: true,
+      ),
+      body: alunosAsyncValue.when(
+        data: (alunos) {
+          if (alunos.isEmpty) {
+            return const Center(
+              child: Text('Nenhum aluno associado encontrado.'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: alunos.length,
             itemBuilder: (context, index) {
-              //final ocorrencia = data[index];
+              final aluno = alunos[index];
+
               return Card(
                 child: ListTile(
-                  leading: const Icon(Icons.description_outlined),
-                  title: const Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Text(
-                     'Rotina do dia',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  leading: const Icon(Icons.person),
+                  title: Text(
+                    aluno.nome,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  subtitle: const Text(
-                    '10/06/2024',
-                    ),
+                  subtitle: Text(
+                    'Data de nascimento: ${_formatarData(aluno.dataNascimento)}',
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetalheControleDiarioViz(),
+                        builder: (context) => DetalheControleDiarioViz(
+                          // Passe os dados do aluno, se necessário
+                        ),
                       ),
                     );
                   },
                 ),
               );
             },
-          ),
-      //   },
-      //   error: (error, stackTrace) => Center(child: Text('Erro: $error')),
-      //   loading: () => const Center(child: CircularProgressIndicator()),
-      // ),
-      
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => Center(child: Text('Erro: $error')),
+      ),
     );
   }
 }

@@ -39,7 +39,10 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
         userData: widget.userData,
       );
     } else if (role == 'responsavel') {
-      controlePage = const ControleDiarioList(
+      final String userId = widget.userData['user']['id']; // Agora é uma String
+      controlePage = ControleDiarioList(
+        userId: userId,
+        userData: widget.userData,
       );
     } else {
       controlePage = const Center(
