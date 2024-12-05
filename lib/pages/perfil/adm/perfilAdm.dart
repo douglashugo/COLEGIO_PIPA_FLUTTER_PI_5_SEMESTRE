@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class MyProfilePageAdm extends StatelessWidget {
@@ -7,33 +8,20 @@ class MyProfilePageAdm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Recupera a imagem base64 do banco de dados
+    final String? imageBase64 = userData['user']['image_profile'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil'),
         centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       // Navegação para atualização de perfil (mantida como comentário para futuro uso)
-        //       // Navigator.of(context).pushNamed('/updateProfile');
-        //     },
-        //     icon: const Icon(
-        //       Icons.edit,
-        //       color: Colors.white,
-        //     ),
-        //   ),
-        // ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          //Navigator.push(context, MaterialPageRoute(builder: (context) {
-            //return const Checkout();
-         // }));
+        onPressed: () {
+          // Placeholder para ação do botão flutuante
         },
         backgroundColor: Colors.orange,
-        child: 
-          const Icon(Icons.edit, color: Colors.white),
-          
+        child: const Icon(Icons.edit, color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(0.0),
@@ -48,9 +36,11 @@ class MyProfilePageAdm extends StatelessWidget {
                   child: Container(
                     width: 200,
                     height: 180,
-                    child: const CircleAvatar(  
-                      
-                        backgroundImage: AssetImage('assets/images/perfil-user.png'),
+                    child: CircleAvatar(
+                      backgroundImage: imageBase64 != null
+                          ? MemoryImage(base64Decode(imageBase64))
+                          : const AssetImage('assets/images/perfil-user.png')
+                              as ImageProvider,
                     ),
                   ),
                 ),
@@ -61,11 +51,10 @@ class MyProfilePageAdm extends StatelessWidget {
                   height: 80,
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   padding: const EdgeInsets.all(4),
-                 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
                           'Nome',
@@ -77,12 +66,12 @@ class MyProfilePageAdm extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
                           userData['user']['nome'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
@@ -98,12 +87,11 @@ class MyProfilePageAdm extends StatelessWidget {
                   height: 80,
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   padding: const EdgeInsets.all(10),
-                  
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                         padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
                           'Email',
                           style: TextStyle(
@@ -114,12 +102,12 @@ class MyProfilePageAdm extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                         padding: EdgeInsets.fromLTRB(0, 2, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
                           userData['user']['email'],
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
@@ -129,12 +117,11 @@ class MyProfilePageAdm extends StatelessWidget {
                   ),
                 ),
                 const Divider(thickness: 2),
-                // Dias de trabalho
+                // Informações
                 Container(
                   width: 350,
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   padding: const EdgeInsets.all(10),
-                  
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -147,67 +134,60 @@ class MyProfilePageAdm extends StatelessWidget {
                         ),
                       ),
                       ListView.builder(
-                        itemCount: 1, 
+                        itemCount: 1,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
                                 Row(
                                   children: [
-                                    Icon(Icons.fiber_manual_record, size: 8),
-                                    SizedBox(width: 1),
+                                    const Icon(Icons.fiber_manual_record, size: 8),
+                                    const SizedBox(width: 1),
                                     Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         '${userData['user']['endereco']?['rua'] ?? ''} - '
                                         '${userData['user']['endereco']?['numero'] ?? ''} - '
                                         '${userData['user']['endereco']?['bairro'] ?? ''}',
-                                        
                                       ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.fiber_manual_record, size: 8),
-                                    SizedBox(width: 1),
+                                    const Icon(Icons.fiber_manual_record, size: 8),
+                                    const SizedBox(width: 1),
                                     Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         'Contato | WhatsApp: ${userData['user']['telefone'] ?? ''}',
-                                        
                                       ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.fiber_manual_record, size: 8),
-                                    SizedBox(width: 1),
-                                    Padding(
+                                    const Icon(Icons.fiber_manual_record, size: 8),
+                                    const SizedBox(width: 1),
+                                    const Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Segundo contato: (19) 99745-2147'
-                                      ),
+                                      child: Text('Segundo contato: (19) 99745-2147'),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.fiber_manual_record, size: 8),
-                                    SizedBox(width: 1),
-                                    Padding(
+                                    const Icon(Icons.fiber_manual_record, size: 8),
+                                    const SizedBox(width: 1),
+                                    const Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Colégio PIPA'
-                                      ),
+                                      child: Text('Colégio PIPA'),
                                     ),
                                   ],
                                 ),
-                                
                               ],
                             ),
                           );
@@ -217,8 +197,6 @@ class MyProfilePageAdm extends StatelessWidget {
                   ),
                 ),
                 const Divider(thickness: 2),
-                
-                
               ],
             ),
           ),
