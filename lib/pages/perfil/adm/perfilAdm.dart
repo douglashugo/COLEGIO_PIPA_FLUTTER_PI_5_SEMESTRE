@@ -1,10 +1,24 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-class MyProfilePageAdm extends StatelessWidget {
+class MyProfilePageAdm extends StatefulWidget {
   final Map<String, dynamic> userData;
 
   const MyProfilePageAdm({super.key, required this.userData});
+
+  @override
+  _MyProfilePageAdmState createState() => _MyProfilePageAdmState();
+}
+
+class _MyProfilePageAdmState extends State<MyProfilePageAdm> {
+  late Map<String, dynamic> userData;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializa os dados do usuário
+    userData = widget.userData;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +29,6 @@ class MyProfilePageAdm extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Perfil'),
         centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Placeholder para ação do botão flutuante
-        },
-        backgroundColor: Colors.orange,
-        child: const Icon(Icons.edit, color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(0.0),
@@ -68,7 +75,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          userData['user']['nome'],
+                          userData['user']['nome'] ?? '',
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: const TextStyle(
@@ -104,7 +111,7 @@ class MyProfilePageAdm extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 2, 0, 5),
                         child: Text(
-                          userData['user']['email'],
+                          userData['user']['email'] ?? '',
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
                           style: const TextStyle(
@@ -165,26 +172,6 @@ class MyProfilePageAdm extends StatelessWidget {
                                       child: Text(
                                         'Contato | WhatsApp: ${userData['user']['telefone'] ?? ''}',
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.fiber_manual_record, size: 8),
-                                    const SizedBox(width: 1),
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text('Segundo contato: (19) 99745-2147'),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.fiber_manual_record, size: 8),
-                                    const SizedBox(width: 1),
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text('Colégio PIPA'),
                                     ),
                                   ],
                                 ),

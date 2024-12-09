@@ -22,7 +22,7 @@ class _AcademicoHomePageState extends State<AcademicoPage2> {
   // Lista de páginas para o bottom navigation bar
   List<Widget> pages = [
     const CategoryHomePagePais(),
-    Cardapio()
+    CardapioListScreen()
     
   ];
 

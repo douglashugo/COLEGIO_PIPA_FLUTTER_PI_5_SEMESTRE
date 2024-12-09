@@ -22,7 +22,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
   // Títulos correspondentes aos itens do bottom navigation bar
   final List<String> appBarTitles = [
     'Home',
-    'Cardápio',
+    'Cardápios',
     'Controle Diário',
   ];
 
@@ -53,7 +53,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
     // Inicializa a lista de páginas dinamicamente
     pages = [
       CategoryHomePage(userData: widget.userData), // Passando os dados do usuário e roles
-      Cardapio(), // Página estática
+      CardapioListScreen(), // Página estática
       controlePage, // Página dinâmica baseada na role
     ];
   }
@@ -83,7 +83,7 @@ class _AcademicoHomePageState extends State<AcademicoHomePage> {
           ),
           NavigationDestination(
             icon: Icon(Icons.restaurant_menu),
-            label: 'Cardápio',
+            label: 'Cardápios',
             selectedIcon: Icon(Icons.restaurant_menu),
           ),
           NavigationDestination(
