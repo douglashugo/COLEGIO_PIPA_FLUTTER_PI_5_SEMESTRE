@@ -60,7 +60,7 @@ class _CardapioListScreenState extends State<CardapioListScreen> {
           html.Url.revokeObjectUrl(url);
         } else {
           // Lógica para Mobile/Outras Plataformas
-          final status = await Permission.storage.request();
+          final status = await Permission.manageExternalStorage.request();
           if (status.isGranted) {
             Directory? downloadsDirectory;
 
@@ -70,7 +70,8 @@ class _CardapioListScreenState extends State<CardapioListScreen> {
               downloadsDirectory = await getApplicationDocumentsDirectory();
             }
 
-            if (downloadsDirectory != null && !downloadsDirectory.existsSync()) {
+            if (downloadsDirectory != null &&
+                !downloadsDirectory.existsSync()) {
               downloadsDirectory.createSync(recursive: true);
             }
 
@@ -86,7 +87,8 @@ class _CardapioListScreenState extends State<CardapioListScreen> {
             ));
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Permissão de armazenamento negada.')),
+              const SnackBar(
+                  content: Text('Permissão de armazenamento negada.')),
             );
           }
         }
