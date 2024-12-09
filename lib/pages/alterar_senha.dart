@@ -72,6 +72,7 @@ class _UpdatePasswordPageState extends ConsumerState<UpdatePasswordPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Alterar Senha'),
+        centerTitle: true,
         backgroundColor: Colors.deepOrange,
       ),
       body: user == null
@@ -138,7 +139,7 @@ class _UpdatePasswordPageState extends ConsumerState<UpdatePasswordPage> {
                       child: ElevatedButton(
                         onPressed: _updatePassword,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepOrange,
+                          backgroundColor: Colors.deepOrange
                         ),
                         child: const Text('Alterar Senha')
                       ),
