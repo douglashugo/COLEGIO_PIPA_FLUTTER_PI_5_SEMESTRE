@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_playground/pages/home/academico_home.dart';
-import 'package:riverpod_playground/pages/home/homePais.dart';
 import 'package:supabase/supabase.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

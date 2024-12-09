@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:io';
+import 'dart:io' show File, Directory, Platform;
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:universal_html/html.dart' as html;
 
 class CardapioListScreen extends StatefulWidget {
   @override
@@ -42,41 +44,54 @@ class _CardapioListScreenState extends State<CardapioListScreen> {
 
   Future<void> _downloadFile(String filePath, String fileName) async {
     try {
-      // Verificar permissões de armazenamento no dispositivo
-      final status = await Permission.manageExternalStorage.request();
-      if (status.isGranted) {
-        final url = filePath; // URL pública do arquivo
+      final url = filePath; // URL pública do arquivo
+      final response = await http.get(Uri.parse(url));
 
-        // Baixar o arquivo a partir da URL pública
-        final response = await http.get(Uri.parse(url));
-        if (response.statusCode == 200) {
-          // Obter o diretório Downloads
-          final downloadsDirectory = Directory('/storage/emulated/0/Download');
-
-          // Garantir que o diretório existe
-          if (!downloadsDirectory.existsSync()) {
-            downloadsDirectory.createSync(recursive: true);
-          }
-
-          // Substituir caracteres inválidos no nome do arquivo
-          final sanitizedFileName = fileName.replaceAll('/', '_');
-
-          // Caminho completo do arquivo
-          final file = File('${downloadsDirectory.path}/$sanitizedFileName');
-
-          // Salvar o arquivo
-          await file.writeAsBytes(response.bodyBytes);
-
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Download concluído em: ${file.path}'),
-          ));
+      if (response.statusCode == 200) {
+        // Identificar a plataforma
+        if (kIsWeb) {
+          // Lógica para Web
+          final blob = html.Blob([response.bodyBytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          final anchor = html.AnchorElement(href: url)
+            ..target = 'blank'
+            ..download = fileName
+            ..click();
+          html.Url.revokeObjectUrl(url);
         } else {
-          throw 'Falha ao baixar o arquivo: ${response.statusCode}';
+          // Lógica para Mobile/Outras Plataformas
+          final status = await Permission.storage.request();
+          if (status.isGranted) {
+            Directory? downloadsDirectory;
+
+            if (Platform.isAndroid) {
+              downloadsDirectory = Directory('/storage/emulated/0/Download');
+            } else if (Platform.isIOS) {
+              downloadsDirectory = await getApplicationDocumentsDirectory();
+            }
+
+            if (downloadsDirectory != null && !downloadsDirectory.existsSync()) {
+              downloadsDirectory.createSync(recursive: true);
+            }
+
+            // Substituir caracteres inválidos no nome do arquivo
+            final sanitizedFileName = fileName.replaceAll('/', '_');
+            final file = File('${downloadsDirectory!.path}/$sanitizedFileName');
+
+            // Salvar o arquivo
+            await file.writeAsBytes(response.bodyBytes);
+
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Download concluído em: ${file.path}'),
+            ));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Permissão de armazenamento negada.')),
+            );
+          }
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Permissão de armazenamento negada.')),
-        );
+        throw 'Falha ao baixar o arquivo: ${response.statusCode}';
       }
     } catch (e) {
       debugPrint('Erro ao baixar arquivo: $e');
@@ -89,9 +104,6 @@ class _CardapioListScreenState extends State<CardapioListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de Cardápios'),
-      ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(

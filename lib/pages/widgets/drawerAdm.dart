@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:riverpod_playground/pages/alterar_senha.dart';
 import 'package:riverpod_playground/pages/infoEscola.dart';
 import 'package:riverpod_playground/pages/login.dart';
 import 'package:riverpod_playground/pages/perfil/adm/perfilAdm.dart';
@@ -61,8 +62,14 @@ class DrawerNavigationAdm extends StatelessWidget {
               color: Colors.orange,
             ),
             title: const Text("Alterar senha"),
-            onTap: () async {
-              await Navigator.of(context).pushNamed('/updatePassword');
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => UpdatePasswordPage(
+                    userId: userData['user']['id'], // Passa o ID do usuário
+                  ),
+                ),
+              );
             },
           ),
           Padding(

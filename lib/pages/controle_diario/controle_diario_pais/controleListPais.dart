@@ -31,10 +31,6 @@ class _ControleDiarioCreateState extends ConsumerState<ControleDiarioList> {
     final alunosAsyncValue = ref.watch(alunosResponsavelProvider(widget.userId));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Alunos de ${widget.userData['user']['nome']}'),
-        centerTitle: true,
-      ),
       body: alunosAsyncValue.when(
         data: (alunos) {
           if (alunos.isEmpty) {
